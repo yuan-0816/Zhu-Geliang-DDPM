@@ -52,7 +52,7 @@ def detect(save_img=False, device=''):
     agnostic_nms = False
     augment = False
     update = False
-    project = '../Zhu_Geliang_datasets/Zhu_Geliang_face'
+    project = '../Zhu_Geliang_datasets/Face_image'
     name = 'exp'
     exist_ok = False
     person = False

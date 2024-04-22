@@ -18,7 +18,7 @@ import numpy as np
 import os 
 
 def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> None:
-    detector = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+    detector = cv2.CascadeClassifier(cv2.data.haarcascades + '/Zhu_Geliang_datasets/Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml')
     recog = cv2.face.LBPHFaceRecognizer_create()    # 啟用訓練人臉模型方法
     faces = []  # 儲存人臉位置大小的串列
     ids = []    # 記錄該人臉 id 的串列
@@ -51,10 +51,10 @@ def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> No
     print('ok!')
 
 
-def Zhu_Geliang_Finder(image_folder_path:str) -> None:
-    detector = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+def Zhu_Geliang_Finder(image_folder_path:str, OutPut_path:str) -> None:
+    detector = cv2.CascadeClassifier('Zhu_Geliang_datasets/Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml')
     recog = cv2.face.LBPHFaceRecognizer_create()    # 啟用訓練人臉模型方法
-    recog.read('Zhu_Geliang_face.yml')               # 讀取訓練好的模型
+    recog.read('Zhu_Geliang_datasets/Find_Zhu_Geliang_model/Zhu_Geliang_face.yml')  # 讀取訓練好的模型
 
 
     file_list = os.listdir(image_folder_path)
@@ -73,28 +73,35 @@ def Zhu_Geliang_Finder(image_folder_path:str) -> None:
                 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  # 轉換成黑白
                 faces = detector.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
 
+                face_index = 0
                 for(x,y,w,h) in faces:
-                    cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)            # 標記人臉外框
+                    # cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)            # 標記人臉外框
                     idnum, confidence = recog.predict(gray[y:y+h,x:x+w])  # 取出 id 號碼以及信心指數 confidence
                     if confidence < 60:
-                        text = 'Zhu Geliang'                               # 如果信心指數小於 60，取得對應的名字
+                        text = 'Zhu Geliang' 
+                        # TODO: 解決檔名問題 ex:test_frame_1_head_5.jpg_0.jpg
+
+                        crop_save_path = OutPut_path + '/' + f'{file_name[:-4]}_{face_index}.jpg'                              # 如果信心指數小於 60，取得對應的名字
+                        cv2.imwrite(str(crop_save_path), img)
+                        face_index += 1
                     else:
                         text = '???'                                          # 不然名字就是 ???
                     # 在人臉外框旁加上名字
-                    cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
+                    # cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
 
-                cv2.imshow('oxxostudio', img)
-                if cv2.waitKey(0) == ord('q'):
-                    break    
+                # cv2.imshow('oxxostudio', img)
+                # if cv2.waitKey(0) == ord('q'):
+                #     break    
 
 
 
 if __name__ == '__main__':
-    image_folder_path = 'C:/Users/wj582/Desktop/exp32'
+    image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp'
     model_save_path = ''
     image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp'
+    OutPut_path = 'Zhu_Geliang_datasets/Zhu_Geliang_face/test'
     # Train_Zhu_Geliang_Finder(image_folder_path, model_save_path)
-    Zhu_Geliang_Finder(image_folder_path)
+    Zhu_Geliang_Finder(image_folder_path, OutPut_path)
 
 
 
