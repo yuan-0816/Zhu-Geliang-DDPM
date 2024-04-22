@@ -34,17 +34,17 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device, load_classifier, time_synchronized
 
 
-def detect(save_img=False):
+def detect(save_img=False, device=''):
 
     weights = ['crowdhuman_yolov5m.pt']
     # source = '../Zhu_Geliang_datasets/Zhu_Geliang_image/test/0.jpg'
     # source = '../Zhu_Geliang_datasets/Zhu_Geliang_image/test2'
     # source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/test.mp4'
-    source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/Episode_1'
+    source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/test_video'
     imgsz = 640
     conf_thres = 0.25
     iou_thres = 0.45
-    device = ''
+    # device = '0'
     view_img = False
     save_txt = False
     save_conf = False
@@ -219,4 +219,7 @@ def detect(save_img=False):
 
 
 if __name__ == '__main__':
-    detect()
+    device = ''
+    if torch.cuda.is_available():
+        device = '1'
+    detect(device=device)

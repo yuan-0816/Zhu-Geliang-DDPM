@@ -38,5 +38,6 @@ __pycache__/
 
 
 yolov5_crowdhuman/
+yolov5-crowdhuman/
 *.venv
 *.vscode
