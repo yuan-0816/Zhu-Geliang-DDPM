@@ -1,5 +1,5 @@
 """
-Yuan @ 2021.10.19
+Yuan @ 2024.04.22
 This is a script to crop human head from video or image.
 You need to move this file to the YOLOv5 directory.
 

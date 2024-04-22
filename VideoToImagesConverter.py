@@ -1,5 +1,5 @@
 """
-Yuan @ 2021.10.19
+Yuan @ 2024.04.22
 This is a simple script to convert a video to a folder of images.
 Zhu Geliang is alive!
 　　    　　 ＿＿＿
