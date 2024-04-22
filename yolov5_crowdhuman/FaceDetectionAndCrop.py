@@ -221,5 +221,6 @@ def detect(save_img=False, device=''):
 if __name__ == '__main__':
     device = ''
     if torch.cuda.is_available():
-        device = '1'
+        device = '0'
+
     detect(device=device)
