@@ -38,6 +38,9 @@ __pycache__/
 
 
 yolov5_crowdhuman/
+!yolov5_crowdhuman/FaceDetectionAndCrop.py
 yolov5-crowdhuman/
+!yolov5-crowdhuman/FaceDetectionAndCrop.py
+
 *.venv
 *.vscode
