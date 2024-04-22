@@ -96,15 +96,8 @@ def Zhu_Geliang_Finder(image_folder_path:str, OutPut_path:str) -> None:
 if __name__ == '__main__':
     image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp'
     model_save_path = 'Zhu_Geliang_datasets/Find_Zhu_Geliang_model'
-    image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp'
+    image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp2'
     OutPut_path = 'Zhu_Geliang_datasets/Zhu_Geliang_face/test'
     # Train_Zhu_Geliang_Finder(image_folder_path, model_save_path)
     Zhu_Geliang_Finder(image_folder_path, OutPut_path)
-
-
-
-
-
-
-
 
