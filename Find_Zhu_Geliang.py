@@ -70,26 +70,27 @@ def Zhu_Geliang_Finder(image_folder_path:str, OutPut_path:str) -> None:
             
             # 檢查圖片是否成功讀取
             if img is not None:
-                gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  # 轉換成黑白
+                show_img = img.copy()
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換成黑白
                 faces = detector.detectMultiScale(gray)  # 追蹤人臉 ( 目的在於標記出外框 )
 
                 face_index = 0
                 for(x,y,w,h) in faces:
-                    # cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)            # 標記人臉外框
+                    cv2.rectangle(show_img, (x,y), (x+w,y+h), (0,255,0), 2)            # 標記人臉外框
                     idnum, confidence = recog.predict(gray[y:y+h,x:x+w])  # 取出 id 號碼以及信心指數 confidence
                     if confidence < 60:
                         text = 'Zhu Geliang' 
                         crop_save_path = OutPut_path + '/' + f'{file_name[:-4]}_{face_index}.jpg'                              # 如果信心指數小於 60，取得對應的名字
-                        cv2.imwrite(str(crop_save_path), img)
+                        # cv2.imwrite(str(crop_save_path), img)
                         face_index += 1
                     else:
                         text = '???'                                          # 不然名字就是 ???
                     # 在人臉外框旁加上名字
-                    # cv2.putText(img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
+                    cv2.putText(show_img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
 
-                # cv2.imshow('oxxostudio', img)
-                # if cv2.waitKey(0) == ord('q'):
-                #     break    
+                cv2.imshow('oxxostudio', show_img)
+                if cv2.waitKey(0) == ord('q'):
+                    break    
 
 
 
@@ -99,5 +100,6 @@ if __name__ == '__main__':
     image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp2'
     OutPut_path = 'Zhu_Geliang_datasets/Zhu_Geliang_face/test'
     # Train_Zhu_Geliang_Finder(image_folder_path, model_save_path)
+    # TODO: 加入是否儲存照片及觀看照片功能
     Zhu_Geliang_Finder(image_folder_path, OutPut_path)
 
