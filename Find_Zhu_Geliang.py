@@ -18,7 +18,7 @@ import numpy as np
 import os 
 
 def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> None:
-    detector = cv2.CascadeClassifier(cv2.data.haarcascades + '/Zhu_Geliang_datasets/Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml')
+    detector = cv2.CascadeClassifier('Zhu_Geliang_datasets/Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml')
     recog = cv2.face.LBPHFaceRecognizer_create()    # 啟用訓練人臉模型方法
     faces = []  # 儲存人臉位置大小的串列
     ids = []    # 記錄該人臉 id 的串列
@@ -47,7 +47,7 @@ def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> No
                 print(f"無法讀取檔案: {file_path}")
     print('training...')                              # 提示開始訓練
     recog.train(faces,np.array(ids))                  # 開始訓練
-    recog.save('Zhu_Geliang_face.yml')
+    recog.save(model_save_path + '/' + 'Zhu_Geliang_face.yml')
     print('ok!')
 
 
@@ -79,8 +79,6 @@ def Zhu_Geliang_Finder(image_folder_path:str, OutPut_path:str) -> None:
                     idnum, confidence = recog.predict(gray[y:y+h,x:x+w])  # 取出 id 號碼以及信心指數 confidence
                     if confidence < 60:
                         text = 'Zhu Geliang' 
-                        # TODO: 解決檔名問題 ex:test_frame_1_head_5.jpg_0.jpg
-
                         crop_save_path = OutPut_path + '/' + f'{file_name[:-4]}_{face_index}.jpg'                              # 如果信心指數小於 60，取得對應的名字
                         cv2.imwrite(str(crop_save_path), img)
                         face_index += 1
@@ -97,7 +95,7 @@ def Zhu_Geliang_Finder(image_folder_path:str, OutPut_path:str) -> None:
 
 if __name__ == '__main__':
     image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp'
-    model_save_path = ''
+    model_save_path = 'Zhu_Geliang_datasets/Find_Zhu_Geliang_model'
     image_folder_path = 'Zhu_Geliang_datasets/Face_image/exp'
     OutPut_path = 'Zhu_Geliang_datasets/Zhu_Geliang_face/test'
     # Train_Zhu_Geliang_Finder(image_folder_path, model_save_path)
