@@ -44,3 +44,4 @@ yolov5_crowdhuman/*
 *.venv
 *.vscode
 
+*.pkl

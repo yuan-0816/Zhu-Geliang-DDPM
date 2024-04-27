@@ -20,6 +20,7 @@ Zhu Geliang is alive!
 import cv2
 import numpy as np
 import os
+from deepface import DeepFace
 
 
 def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> None:
@@ -111,10 +112,42 @@ def Zhu_Geliang_Finder(image_folder_path: str, OutPut_path: str) -> None:
                 #     break
 
 
+
+
+def UseDeepFace():
+    img_path = "Zhu_Geliang_datasets/Face_image/exp/test_frame_258_head_5_0.jpg"
+    db_path = "Zhu_Geliang_datasets/Zhu_Geliang_face/test"
+
+
+    try:
+        dfs = DeepFace.find(img_path = img_path, db_path = db_path)
+        print(dfs)
+    except:
+        pass
+
+    # # 取得資料夾中的所有檔案
+    # file_list = os.listdir(img_path)
+
+    # for file_name in file_list:
+    #     # 檢查檔案是否為 JPG 格式
+    #     if file_name.endswith(".jpg") or file_name.endswith(".JPG"):
+            
+    #         file_path = os.path.join(image_folder_path, file_name)
+    #         try:
+    #             dfs = DeepFace.find(img_path = file_path, db_path = db_path)
+    #             print(dfs)
+    #         except:
+    #             pass
+
+
+
 if __name__ == "__main__":
     model_save_path = "Zhu_Geliang_datasets/Find_Zhu_Geliang_model"
     image_folder_path = "Zhu_Geliang_datasets/Face_image/exp"
     OutPut_path = "Zhu_Geliang_datasets/Zhu_Geliang_face/test"
+    
     # Train_Zhu_Geliang_Finder(image_folder_path, model_save_path)
-    # TODO: 加入是否儲存照片及觀看照片功能
-    Zhu_Geliang_Finder(image_folder_path, OutPut_path)
+    # Zhu_Geliang_Finder(image_folder_path, OutPut_path)
+
+    # TODO: 改用 DeepFace 來辨識
+    UseDeepFace()
