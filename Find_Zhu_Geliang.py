@@ -2,16 +2,15 @@
 Yuan @ 2024.04.22
 This is a script to find Zhu Geliang.
 Zhu Geliang is alive!
-　　    　　 ＿＿＿
-　　　　　／＞　　  フ
-　　　　　|  　_　 _|
-　 　　　／` ミ＿xノ
-　　 　 /　　　 　 |
-　　　 /　 ヽ　　 ﾉ
-　 　 │　　|　|　|
-　／￣|　　 |　|　|
-　| (￣ヽ＿_ヽ_)__)
-　＼二つ
+
+ #######  ###                          ####             ###       ##
+ #   ##    ##                         ##  ##             ##
+    ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##
+   ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##
+  ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##
+ ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+ #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##
+                                                                                           #####
 """
 
 # TODO: 用其他更精準的人臉辨識模型 ex:DeepFace https://github.com/serengil/deepface
@@ -162,4 +161,6 @@ if __name__ == "__main__":
     # Zhu_Geliang_Finder(image_folder_path, OutPut_path)
 
     # TODO: 改用 DeepFace 來辨識
-    UseDeepFace()
+    # UseDeepFace()
+    from PrintZhuGeliangName import printZhuGeliang
+    printZhuGeliang()
