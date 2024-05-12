@@ -1,6 +1,6 @@
 """
 Yuan @ 2024.05.12
-This is a script to find Zhu Geliang.
+This is a script to print the artwork and information of Zhu Geliang.
 Zhu Geliang is alive!
 """
 

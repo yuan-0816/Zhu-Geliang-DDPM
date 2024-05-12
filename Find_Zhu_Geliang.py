@@ -1,16 +1,16 @@
 """
 Yuan @ 2024.04.22
-This is a script to find Zhu Geliang.
+This is a script to find Zhu Geliang face in a folder of images or videos.
 Zhu Geliang is alive!
 
- #######  ###                          ####             ###       ##
- #   ##    ##                         ##  ##             ##
-    ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##
-   ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##
-  ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##
- ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
- #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##
-                                                                                           #####
+     #######  ###                          ####             ###       ##                                           ##
+     #   ##    ##                         ##  ##             ##                                                   ####
+        ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##            ####
+       ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##              ##
+      ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##              ##
+     ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+     #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##              ##
+                                                                                               #####
 """
 
 import cv2
@@ -163,36 +163,15 @@ def process_files_threaded(file_lists, folder_path, output_path, show_img, num_t
 
 
 if __name__ == "__main__":
-    start_time = time.time()  # 記錄開始時間
+    start_time = time.time()  # start time
     PrintEverything()
     parser = argparse.ArgumentParser(prog="Find_Zhu_Geliang.py")
     parser.add_argument("--is-train", type=bool, default=False, help="是否訓練模型")
     parser.add_argument("--view-img", type=bool, default=False, help="是否顯示圖片")
-    parser.add_argument(
-        "--source-folder",
-        type=str,
-        default="Zhu_Geliang_datasets/Face_image/exp",
-        # default="Zhu_Geliang_datasets/Zhu_Geliang_face/test2",
-        help="目標資料夾路徑",
-    )
-    parser.add_argument(
-        "--output-path",
-        type=str,
-        default="Zhu_Geliang_datasets/Zhu_Geliang_face/test2",
-        help="輸出資料夾路徑",
-    )
-    parser.add_argument(
-        "--model-save-path",
-        type=str,
-        default="Find_Zhu_Geliang_model",
-        help="模型儲存路徑",
-    )
-    parser.add_argument(
-        "--train-image-path",
-        type=str,
-        default="Zhu_Geliang_datasets/Zhu_Geliang_face/test",
-        help="訓練模型資料夾路徑",
-    )
+    parser.add_argument("--source-folder", type=str, default="Zhu_Geliang_datasets/Face_image/exp", help="目標資料夾路徑")
+    parser.add_argument("--output-path", type=str, default="Zhu_Geliang_datasets/Zhu_Geliang_face/test2", help="輸出資料夾路徑")
+    parser.add_argument("--model-save-path", type=str, default="Find_Zhu_Geliang_model", help="模型儲存路徑")
+    parser.add_argument("--train-image-path", type=str, default="Zhu_Geliang_datasets/Zhu_Geliang_face/test", help="訓練模型資料夾路徑")
     parser.add_argument("--num-threads", type=int, default=16, help="處理的執行續數量")
     args = parser.parse_args()
 
@@ -203,12 +182,6 @@ if __name__ == "__main__":
             os.listdir(args.source_folder), args.num_threads
         )
 
-        detector = cv2.CascadeClassifier(
-            "Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml"
-        )
-        recog = cv2.face.LBPHFaceRecognizer_create()
-        recog.read("Find_Zhu_Geliang_model/Zhu_Geliang_face.yml")
-
         process_files_threaded(
             threads_lists,
             args.source_folder,
@@ -217,9 +190,7 @@ if __name__ == "__main__":
             args.num_threads
         )
 
-        # Zhu_Geliang_Finder(args.source_folder, threads_lists[0], args.output_path, args.view_img, detector, recog)
-
-        # 計算並印出程式執行的時間
+        # print run time
         end_time = time.time()
         elapsed_time = end_time - start_time
-        print(f"程式執行時間：{elapsed_time} 秒")
+        print(f"run time: {elapsed_time} seconds")
