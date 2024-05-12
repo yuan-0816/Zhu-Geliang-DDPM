@@ -13,20 +13,17 @@ Zhu Geliang is alive!
                                                                                            #####
 """
 
-# TODO: Thread 加快速度
-# TODO: 加入進度條
-
 import cv2
 import numpy as np
 import os
 import argparse
 from tqdm import tqdm
-import threading
 import concurrent.futures
+import time
 
 from InfoZhuGeliangDDPM import PrintEverything
 
-import time
+
 
 
 def Split_file_lists(input_list, num_groups) -> list:
@@ -122,7 +119,7 @@ def Zhu_Geliang_Finder(
                     idnum, confidence = recog.predict(
                         gray[y : y + h, x : x + w]
                     )  # 取出 id 號碼以及信心指數 confidence
-                    if confidence < 80:
+                    if confidence < 70:
                         text = "Zhu Geliang"
                         crop_save_path = (
                             OutPut_path + "/" + f"{file_name[:-4]}_{face_index}.jpg"
@@ -165,23 +162,6 @@ def process_files_threaded(file_lists, folder_path, output_path, show_img, num_t
 
 
 
-# def process_files_threaded(
-#     file_lists, folder_path, output_path, show_img
-# ):
-#     threads = []
-#     for file_list in file_lists:
-#         # print(file_list)
-#         thread = threading.Thread(
-#             target=Zhu_Geliang_Finder,
-#             args=(folder_path, file_list, output_path, show_img),
-#         )
-#         thread.start()
-#         threads.append(thread)
-
-#     for thread in threads:
-#         thread.join()
-
-
 if __name__ == "__main__":
     start_time = time.time()  # 記錄開始時間
     PrintEverything()
@@ -213,7 +193,7 @@ if __name__ == "__main__":
         default="Zhu_Geliang_datasets/Zhu_Geliang_face/test",
         help="訓練模型資料夾路徑",
     )
-    parser.add_argument("--num-threads", type=int, default=5, help="處理的執行續數量")
+    parser.add_argument("--num-threads", type=int, default=16, help="處理的執行續數量")
     args = parser.parse_args()
 
     if args.is_train:
