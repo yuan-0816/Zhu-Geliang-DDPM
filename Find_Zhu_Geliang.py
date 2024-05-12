@@ -22,33 +22,39 @@ import os
 import argparse
 from tqdm import tqdm
 import threading
+import concurrent.futures
 
 from InfoZhuGeliangDDPM import PrintEverything
 
-def split_list(input_list, num_groups):
+import time
+
+
+def Split_file_lists(input_list, num_groups) -> list:
+    if len(input_list) < num_groups:
+        num_groups = len(input_list)
     avg = len(input_list) // num_groups
     remainder = len(input_list) % num_groups
     result = []
     start = 0
     for i in range(num_groups):
         size = avg + 1 if i < remainder else avg
-        result.append(input_list[start:start+size])
+        result.append(input_list[start : start + size])
         start += size
     return result
 
 
 def check_file_type(file_path: str) -> str:
-    img_formats = ['bmp', 'jpg', 'jpeg', 'png', 'tif', 'tiff', 'dng', 'webp']
-    vid_formats = ['mov', 'avi', 'mp4', 'mpg', 'mpeg', 'm4v', 'wmv', 'mkv']
-    
-    file_extension = file_path.split('.')[-1].lower()
-    
+    img_formats = ["bmp", "jpg", "jpeg", "png", "tif", "tiff", "dng", "webp"]
+    vid_formats = ["mov", "avi", "mp4", "mpg", "mpeg", "m4v", "wmv", "mkv"]
+
+    file_extension = file_path.split(".")[-1].lower()
+
     if file_extension in img_formats:
-        return 'image'
+        return "image"
     elif file_extension in vid_formats:
-        return 'video'
+        return "video"
     else:
-        return 'unknown'
+        return "unknown"
 
 
 def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> None:
@@ -87,57 +93,97 @@ def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> No
     print("ok!")
 
 
-def Zhu_Geliang_Finder(folder_path: str, file_list: list ,OutPut_path: str, Show_img: bool, detector, recog) -> None:
-    if file_list:
-        for file_name in tqdm(file_list, desc="Processing images"):
-            file_path = os.path.join(folder_path, file_name)
+def Zhu_Geliang_Finder(
+    folder_path: str, file_list: list, OutPut_path: str, Show_img: bool
+) -> None:
+    detector = cv2.CascadeClassifier(
+        "Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml"
+    )
+    recog = cv2.face.LBPHFaceRecognizer_create()
+    recog.read("Find_Zhu_Geliang_model/Zhu_Geliang_face.yml")
 
-            if check_file_type(file_path) == 'image':
-                img = cv2.imread(file_path)
-                if img is not None:
-                    show_img = img.copy()
-                    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換成黑白
-                    faces = detector.detectMultiScale(
-                        gray
-                    )  # 追蹤人臉 ( 目的在於標記出外框 )
+    for file_name in tqdm(file_list, desc="Detect Zhu Geliang..."):
+        file_path = os.path.join(folder_path, file_name)
 
-                    face_index = 0
-                    for x, y, w, h in faces:
-                        cv2.rectangle(show_img, (x, y), (x+w, y+h), (0, 255, 0), 2)            # 標記人臉外框
-                        idnum, confidence = recog.predict(
-                            gray[y : y + h, x : x + w]
-                        )  # 取出 id 號碼以及信心指數 confidence
-                        if confidence < 80:
-                            text = "Zhu Geliang"
-                            crop_save_path = (
-                                OutPut_path + "/" + f"{file_name[:-4]}_{face_index}.jpg"
-                            )
-                            cv2.imwrite(str(crop_save_path), img)
-                            face_index += 1
-                        else:
-                            text = "???"
-                        # 在人臉外框旁加上名字
-                        cv2.putText(show_img, text, (x,y-5),cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2, cv2.LINE_AA)
-                    if Show_img:
-                        cv2.imshow('oxxostudio', show_img)
-                        if cv2.waitKey(0) == ord('q'):
-                            break
-            else:
-                continue
+        if check_file_type(file_path) == "image":
+            img = cv2.imread(file_path)
+            if img is not None:
+                show_img = img.copy()
+                gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 轉換成黑白
+                faces = detector.detectMultiScale(
+                    gray
+                )  # 追蹤人臉 ( 目的在於標記出外框 )
 
-def process_files_threaded(file_lists, folder_path, output_path, show_img, detector, recog):
-    threads = []
-    for file_list in file_lists:
-        print(file_list)
-    #     thread = threading.Thread(target=Zhu_Geliang_Finder, args=(file_list, folder_path, output_path, show_img, detector, recog))
-    #     thread.start()
-    #     threads.append(thread)
+                face_index = 0
+                for x, y, w, h in faces:
+                    cv2.rectangle(
+                        show_img, (x, y), (x + w, y + h), (0, 255, 0), 2
+                    )  # 標記人臉外框
+                    idnum, confidence = recog.predict(
+                        gray[y : y + h, x : x + w]
+                    )  # 取出 id 號碼以及信心指數 confidence
+                    if confidence < 80:
+                        text = "Zhu Geliang"
+                        crop_save_path = (
+                            OutPut_path + "/" + f"{file_name[:-4]}_{face_index}.jpg"
+                        )
+                        cv2.imwrite(str(crop_save_path), img)
+                        face_index += 1
+                    else:
+                        text = "???"
+                    # 在人臉外框旁加上名字
+                    cv2.putText(
+                        show_img,
+                        text,
+                        (x, y - 5),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        1,
+                        (0, 255, 0),
+                        2,
+                        cv2.LINE_AA,
+                    )
+                if Show_img:
+                    cv2.imshow("oxxostudio", show_img)
+                    if cv2.waitKey(0) == ord("q"):
+                        break
+        else:
+            continue
 
-    # for thread in threads:
-    #     thread.join()
+
+def process_files_threaded(file_lists, folder_path, output_path, show_img, num_threads):
+    with concurrent.futures.ProcessPoolExecutor(max_workers=num_threads) as executor:
+        # 將每個文件列表提交給執行器處理
+        futures = [executor.submit(Zhu_Geliang_Finder, folder_path, file_list, output_path, show_img) for file_list in file_lists]
+        
+        # 等待所有任務完成
+        for future in concurrent.futures.as_completed(futures):
+            # 確認任務是否成功完成
+            try:
+                future.result()
+            except Exception as e:
+                print(f"An error occurred: {e}")
+
+
+
+# def process_files_threaded(
+#     file_lists, folder_path, output_path, show_img
+# ):
+#     threads = []
+#     for file_list in file_lists:
+#         # print(file_list)
+#         thread = threading.Thread(
+#             target=Zhu_Geliang_Finder,
+#             args=(folder_path, file_list, output_path, show_img),
+#         )
+#         thread.start()
+#         threads.append(thread)
+
+#     for thread in threads:
+#         thread.join()
 
 
 if __name__ == "__main__":
+    start_time = time.time()  # 記錄開始時間
     PrintEverything()
     parser = argparse.ArgumentParser(prog="Find_Zhu_Geliang.py")
     parser.add_argument("--is-train", type=bool, default=False, help="是否訓練模型")
@@ -162,42 +208,38 @@ if __name__ == "__main__":
         help="模型儲存路徑",
     )
     parser.add_argument(
-    "--train-image-path",
-    type=str,
-    default="Zhu_Geliang_datasets/Zhu_Geliang_face/test",
-    help="訓練模型資料夾路徑",
+        "--train-image-path",
+        type=str,
+        default="Zhu_Geliang_datasets/Zhu_Geliang_face/test",
+        help="訓練模型資料夾路徑",
     )
-    parser.add_argument(
-    "--num-threads",
-    type=int,
-    default=30,
-    help="處理的執行續數量",
-    )
+    parser.add_argument("--num-threads", type=int, default=5, help="處理的執行續數量")
     args = parser.parse_args()
-
 
     if args.is_train:
         Train_Zhu_Geliang_Finder(args.train_image_path, args.model_save_path)
     else:
-        my_list = os.listdir(args.source_folder)
-        num_groups = args.num_threads
-        result = split_list(my_list, num_groups)
-        # print(result)
+        threads_lists = Split_file_lists(
+            os.listdir(args.source_folder), args.num_threads
+        )
+
         detector = cv2.CascadeClassifier(
             "Find_Zhu_Geliang_model/haarcascade_frontalface_default.xml"
         )
         recog = cv2.face.LBPHFaceRecognizer_create()
         recog.read("Find_Zhu_Geliang_model/Zhu_Geliang_face.yml")
 
+        process_files_threaded(
+            threads_lists,
+            args.source_folder,
+            args.output_path,
+            args.view_img,
+            args.num_threads
+        )
 
+        # Zhu_Geliang_Finder(args.source_folder, threads_lists[0], args.output_path, args.view_img, detector, recog)
 
-        process_files_threaded(result, args.source_folder, args.output_path, args.view_img, detector, recog)
-
-        # Zhu_Geliang_Finder(args.source_folder, result[6], args.output_path, args.view_img, detector, recog)
-        
-
-
-
-
-        
-
+        # 計算並印出程式執行的時間
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"程式執行時間：{elapsed_time} 秒")
