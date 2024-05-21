@@ -4,20 +4,18 @@ This is a script to crop human head from video or image.
 You need to move this file to the YOLOv5 directory.
 
 Zhu Geliang is alive!
-　　    　　 ＿＿＿
-　　　　　／＞　　  フ
-　　　　　|  　_　 _|
-　 　　　／` ミ＿xノ
-　　 　 /　　　 　 |
-　　　 /　 ヽ　　 ﾉ
-　 　 │　　|　|　|
-　／￣|　　 |　|　|
-　| (￣ヽ＿_ヽ_)__)
-　＼二つ
+
+     #######  ###                          ####             ###       ##                                           ##
+     #   ##    ##                         ##  ##             ##                                                   ####
+        ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##            ####
+       ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##              ##
+      ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##              ##
+     ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+     #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##              ##
+                                                                                               #####
 """
 
 
-import argparse
 import time
 from pathlib import Path
 
@@ -37,10 +35,7 @@ from utils.torch_utils import select_device, load_classifier, time_synchronized
 def detect(save_img=False, device=''):
 
     weights = ['crowdhuman_yolov5m.pt']
-    # source = '../Zhu_Geliang_datasets/Zhu_Geliang_image/test/0.jpg'
-    # source = '../Zhu_Geliang_datasets/Zhu_Geliang_image/test2'
-    # source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/test.mp4'
-    source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/test_video'
+    source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/Episode_1'
     imgsz = 640
     conf_thres = 0.25
     iou_thres = 0.45

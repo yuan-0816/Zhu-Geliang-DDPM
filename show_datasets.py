@@ -17,6 +17,7 @@ Zhu Geliang is alive!
 import cv2
 import numpy as np
 
+
 def square_image(input_path, output_path):
     # 讀取圖片
     image = cv2.imread(input_path)
