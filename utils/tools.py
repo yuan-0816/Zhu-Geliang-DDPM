@@ -14,6 +14,23 @@ Zhu Geliang is alive!
 
 """
 
+import os
+
+def get_images_path_list(folder_path: str) -> list:
+    file_list = os.listdir(folder_path)
+    images_list = []
+
+    for file_name in file_list:
+        if check_file_type(file_name) == "image":
+
+            file_path = os.path.join(folder_path, file_name)
+            images_list.append(file_path)
+    
+    return images_list
+
+
+
+
 def check_file_type(file_path: str) -> str:
     img_formats = ["bmp", "jpg", "jpeg", "png", "tif", "tiff", "dng", "webp"]
     vid_formats = ["mov", "avi", "mp4", "mpg", "mpeg", "m4v", "wmv", "mkv"]
@@ -60,3 +77,7 @@ def PrintInfo():
     """
     print(artwork)
 
+
+if __name__ == '__main__':
+    pass
+ 
