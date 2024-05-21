@@ -21,37 +21,8 @@ from tqdm import tqdm
 import concurrent.futures
 import time
 
-from InfoZhuGeliangDDPM import PrintEverything
+from utils.tools import PrintInfo, Split_file_lists, check_file_type
 
-
-
-
-def Split_file_lists(input_list, num_groups) -> list:
-    if len(input_list) < num_groups:
-        num_groups = len(input_list)
-    avg = len(input_list) // num_groups
-    remainder = len(input_list) % num_groups
-    result = []
-    start = 0
-    for i in range(num_groups):
-        size = avg + 1 if i < remainder else avg
-        result.append(input_list[start : start + size])
-        start += size
-    return result
-
-
-def check_file_type(file_path: str) -> str:
-    img_formats = ["bmp", "jpg", "jpeg", "png", "tif", "tiff", "dng", "webp"]
-    vid_formats = ["mov", "avi", "mp4", "mpg", "mpeg", "m4v", "wmv", "mkv"]
-
-    file_extension = file_path.split(".")[-1].lower()
-
-    if file_extension in img_formats:
-        return "image"
-    elif file_extension in vid_formats:
-        return "video"
-    else:
-        return "unknown"
 
 
 def Train_Zhu_Geliang_Finder(image_folder_path: str, model_save_path: str) -> None:
@@ -150,12 +121,10 @@ def Zhu_Geliang_Finder(
 
 def process_files_threaded(file_lists, folder_path, output_path, show_img, num_threads):
     with concurrent.futures.ProcessPoolExecutor(max_workers=num_threads) as executor:
-        # 將每個文件列表提交給執行器處理
+       
         futures = [executor.submit(Zhu_Geliang_Finder, folder_path, file_list, output_path, show_img) for file_list in file_lists]
         
-        # 等待所有任務完成
         for future in concurrent.futures.as_completed(futures):
-            # 確認任務是否成功完成
             try:
                 future.result()
             except Exception as e:
@@ -165,7 +134,7 @@ def process_files_threaded(file_lists, folder_path, output_path, show_img, num_t
 
 if __name__ == "__main__":
     start_time = time.time()  # start time
-    PrintEverything()
+    PrintInfo()
     parser = argparse.ArgumentParser(prog="Find_Zhu_Geliang.py")
     parser.add_argument("--is-train", type=bool, default=False, help="是否訓練模型")
     parser.add_argument("--view-img", type=bool, default=False, help="是否顯示圖片")
