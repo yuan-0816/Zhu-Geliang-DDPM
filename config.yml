@@ -1,0 +1,59 @@
+### model params
+Model:
+  in_channels: 3
+  out_channels: 3
+  model_channels: 128
+  attention_resolutions: [2, ]
+  num_res_blocks: 2
+  dropout: 0.1
+  channel_mult: [1, 2, 2, 2]
+  conv_resample: True
+  num_heads: 4
+
+### dataset params
+Dataset:
+  dataset: "custom"
+  train: True
+  data_path: "E:/code training/python/DDPM/Zhu-Geliang-DDPM/Zhu_Geliang_datasets/test"
+  # If mnist and cifar datasets, whether to download it.
+  download: True
+  # specify as needed.
+  image_size: [ 64, 64 ]
+
+  # must be one of {'RGB', 'L', 'CMYK'}.
+  mode: "RGB"
+  # decide what suffix to load for the image.
+  suffix: ["png", "jpg"]
+
+  # parameters for torch.utils.data.DataLoader
+  batch_size: 64
+  shuffle: True
+  drop_last: True
+  pin_memory: True
+  num_workers: 4
+
+### trainer params
+Trainer:
+  # sample time steps
+  T: 1000
+  beta: [0.0001, 0.02]
+
+
+### callback params
+Callback:
+  # The save path for checkpoint.
+  filepath: "./checkpoint/Zhu_Geliang.pth"
+  # Frequency of checkpoint saving.
+  save_freq: 1
+
+### train params
+# device: "cuda:0"
+device: "cpu"
+epochs: 1000
+# Whether to continue training, True or False
+consume: False
+# If continue training, which checkpoint to load
+consume_path: "./checkpoint/Zhu_Geliang.pth"
+
+### optimizer params
+lr: 0.0002
