@@ -22,6 +22,25 @@ from torchvision.utils import make_grid
 from PIL import Image
 from pathlib2 import Path
 import yaml
+import matplotlib.pyplot as plt
+import json
+
+def plot_losses(losses, filepath):
+    plt.plot(losses, label='Training Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training Loss Over Epochs')
+    plt.legend()
+    plt.savefig(filepath)
+    plt.show()
+
+def save_losses(losses, filepath):
+    with open(filepath, 'w') as f:
+        json.dump(losses, f)
+
+def load_losses(filepath):
+    with open(filepath, 'r') as f:
+        return json.load(f)
 
 
 def load_yaml(yml_path: Union[Path, str], encoding="utf-8"):

@@ -9,7 +9,7 @@ def parse_option():
     parser = ArgumentParser()
     parser.add_argument("-cp", "--checkpoint_path", type=str, required=True)
     parser.add_argument("--device", type=str, default="cuda")
-    parser.add_argument("--sampler", type=str, default="ddpm", choices=["ddpm", "ddim"])
+    parser.add_argument("--sampler", type=str, default="ddim", choices=["ddpm", "ddim"])
 
     # generator param
     parser.add_argument("-bs", "--batch_size", type=int, default=16)
