@@ -25,7 +25,7 @@ from utils.tools import get_images_path_list, Split_file_lists, PrintInfo
 
 
 
-def Square_Amd_Resize_Image(datasets_path:list, output_folder:str, size:int=256) -> None:
+def Square_Amd_Resize_Image(datasets_path:list, output_folder:str, size:int=64) -> None:
 
     for image_path in tqdm(datasets_path, desc="Processing images..."):
         image = cv2.imread(image_path)
@@ -64,7 +64,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog="create_square_datasets.py")
     parser.add_argument("--datasets-path", type=str, default="D:/Deep_Learning_ENV/Zhu_Geliang_DDPM/Zhu_Geliang_datasets/Zhu_Geliang_face/Episode_2_Zhu_Geliang_face", help="datasets path")
     parser.add_argument("--output-path", type=str, default="D:/Deep_Learning_ENV/Zhu_Geliang_DDPM/Zhu_Geliang_datasets/Zhu_Geliang_Square", help="output path")
-    parser.add_argument("--size", type=int, default=256, help="resize size")
+    parser.add_argument("--size", type=int, default=64, help="resize size")
     parser.add_argument("--num-threads", type=int, default=16, help="number of threads")
 
     args = parser.parse_args()
