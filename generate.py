@@ -1,7 +1,7 @@
 from utils.engine import DDPMSampler, DDIMSampler
 from model.UNet import UNet
 import torch
-from utils.tools import save_sample_image, save_image
+from utils.tools import save_sample_image, save_image, PrintInfo
 from argparse import ArgumentParser
 
 
@@ -65,5 +65,6 @@ def generate(args):
 
 
 if __name__ == "__main__":
+    PrintInfo()
     args = parse_option()
     generate(args)

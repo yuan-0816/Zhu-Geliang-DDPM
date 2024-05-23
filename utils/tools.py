@@ -24,6 +24,8 @@ from pathlib2 import Path
 import yaml
 import matplotlib.pyplot as plt
 import json
+import numpy as np
+
 
 def plot_losses(losses, filepath):
     plt.plot(losses, label='Training Loss')
@@ -106,6 +108,8 @@ def save_image(images: torch.Tensor, nrow: int = 8, show: bool = True, path: Opt
     if show:
         im.show()
     return grid
+
+
 
 
 def save_sample_image(images: torch.Tensor, show: bool = True, path: Optional[str] = None,
