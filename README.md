@@ -32,14 +32,14 @@ Follow his tutorial to install the [requirements.txt](https://github.com/deepakc
 And put the pre-trained weights to the [weights](https://github.com/deepakcrk/yolov5-crowdhuman/tree/master/weights) folder.
 After completing the installation, copy my head extraction program into the project folder.
 
-### copy my script to the project folder:
+### Copy my script to the project folder:
 ```
 cd .. && cp FaceDetectionAndCrop.py yolov5_crowdhuman/
 ```
 
-### put the Zhu-Geliang video into the dataset [folder](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/ZhuGeliangRecognizer/Zhu_Geliang_datasets/Zhu_Geliang_video):
+### Put the Zhu-Geliang video into the dataset [folder](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/ZhuGeliangRecognizer/Zhu_Geliang_datasets/Zhu_Geliang_video):
 
-### run
+### Run
 ```
 python FaceDetectionAndCrop.py
 ```
