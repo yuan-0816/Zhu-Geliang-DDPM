@@ -15,21 +15,32 @@
                                                                                                #####
 ```
 
+---
+I use [yolov5-crowdhuman](https://github.com/deepakcrk/yolov5-crowdhuman) to make the Zhu-Geliang datasets, and I use the opencv "face.LBPHFaceRecognizer" to find the face of Zhu-Geliang. 
 
+### Find the face of Zhu-Geliang:
 ```
-git clone https://github.com/yuan-0816/Zhu-Geliang-DDPM.git
-cd Zhu-Geliang-DDPM/yolov5_crowdhuman
+git clone https://github.com/yuan-0816/Zhu-Geliang-DDPM.git -b ZhuGeliangRecognizer
 ```
 
-We use this yolo repository to make the Zhu-Geliang datasets:
+We use [this](https://github.com/deepakcrk/yolov5-crowdhuman) yolo repository to make the Zhu-Geliang datasets:
 ```
+cd Zhu-Geliang-DDPM && mkdir yolov5_crowdhuman && cd yolov5_crowdhuman
 git clone https://github.com/deepakcrk/yolov5-crowdhuman.git/.
-pip install -r requirements.txt
+```
+Follow his tutorial to install the [requirements.txt](https://github.com/deepakcrk/yolov5-crowdhuman/blob/master/requirements.txt)   
+And put the pre-trained weights to the [weights](https://github.com/deepakcrk/yolov5-crowdhuman/tree/master/weights) folder.
+After completing the installation, copy my head extraction program into the project folder.
+
+### copy my script to the project folder:
+```
+cd .. && cp FaceDetectionAndCrop.py yolov5_crowdhuman/
 ```
 
-Download the pre-trained weights of YOLOv5:
-https://github.com/deepakcrk/yolov5-crowdhuman   
-put this pre-trained weights to "yolov5_crowdhuman" folder
+### run
+```
+python FaceDetectionAndCrop.py
+```
 
 
 
