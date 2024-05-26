@@ -37,10 +37,22 @@ After completing the installation, copy my head extraction program into the proj
 cd .. && cp FaceDetectionAndCrop.py yolov5_crowdhuman/
 ```
 
+### put the Zhu-Geliang video into the dataset [folder](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/ZhuGeliangRecognizer/Zhu_Geliang_datasets/Zhu_Geliang_video):
+
 ### run
 ```
 python FaceDetectionAndCrop.py
 ```
+the result will be saved in the [folder](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/ZhuGeliangRecognizer/Zhu_Geliang_datasets/Face_image).
+
+### Filter out non-Zhu-Geliang faces.
+I use the opencv "face.LBPHFaceRecognizer" to find the face of Zhu-Geliang.
+```
+python Find_Zhu_Geliang.py --source-folder <path to the Face_image folder> --output-path <Zhu_Geliang_datasets/Zhu_Geliang_face>  --num-threads <number of threads, default is 16>
+```
+You can change the number of threads to speed up the process.
+
+The result will be saved in the [folder](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/ZhuGeliangRecognizer/Zhu_Geliang_datasets/Zhu_Geliang_face).
 
 
 

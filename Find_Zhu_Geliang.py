@@ -138,10 +138,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="Find_Zhu_Geliang.py")
     parser.add_argument("--is-train", type=bool, default=False, help="是否訓練模型")
     parser.add_argument("--view-img", type=bool, default=False, help="是否顯示圖片")
-    parser.add_argument("--source-folder", type=str, default="Zhu_Geliang_datasets/Face_image/exp3", help="目標資料夾路徑")
-    parser.add_argument("--output-path", type=str, default="Zhu_Geliang_datasets/Zhu_Geliang_face/Episode_1_Zhu_Geliang_face", help="輸出資料夾路徑")
+    parser.add_argument("--source-folder", type=str, default="Zhu_Geliang_datasets/Face_image/exp", help="目標資料夾路徑")
+    parser.add_argument("--output-path", type=str, default="Zhu_Geliang_datasets/Zhu_Geliang_face", help="輸出資料夾路徑")
     parser.add_argument("--model-save-path", type=str, default="Find_Zhu_Geliang_model", help="模型儲存路徑")
-    parser.add_argument("--train-image-path", type=str, default="Zhu_Geliang_datasets/Zhu_Geliang_face/test3", help="訓練模型資料夾路徑")
+    parser.add_argument("--train-image-path", type=str, default="", help="訓練模型資料夾路徑")
     parser.add_argument("--num-threads", type=int, default=16, help="處理的執行續數量")
     args = parser.parse_args()
 
