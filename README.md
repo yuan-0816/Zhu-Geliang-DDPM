@@ -1,3 +1,21 @@
+### This repostory is inspired by / based on the following repositories:
+   - [diffusion-DDIM-pytorch](https://github.com/Alokia/diffusion-DDIM-pytorch)
+   - [yolov5-crowdhuman](https://github.com/deepakcrk/yolov5-crowdhuman)
+
+---
+```
+
+     #######  ###                          ####             ###       ##                                           ##
+     #   ##    ##                         ##  ##             ##                                                   ####
+        ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##            ####
+       ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##              ##
+      ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##              ##
+     ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+     #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##              ##
+                                                                                               #####
+```
+
+
 ```
 git clone https://github.com/yuan-0816/Zhu-Geliang-DDPM.git
 cd Zhu-Geliang-DDPM/yolov5_crowdhuman
@@ -14,16 +32,7 @@ https://github.com/deepakcrk/yolov5-crowdhuman
 put this pre-trained weights to "yolov5_crowdhuman" folder
 
 
-```
- #######  ###                          ####             ###       ##
- #   ##    ##                         ##  ##             ##
-    ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##
-   ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##
-  ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##
- ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
- #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##
-                                                                                           #####
-```
+
 
 
 ```
