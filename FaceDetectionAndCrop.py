@@ -35,7 +35,7 @@ from utils.torch_utils import select_device, load_classifier, time_synchronized
 def detect(save_img=False, device=''):
 
     weights = ['crowdhuman_yolov5m.pt']
-    source = '../Zhu_Geliang_datasets/Zhu_Geliang_video/Episode_1'
+    source = '../Zhu_Geliang_datasets/Zhu_Geliang_video'
     imgsz = 640
     conf_thres = 0.25
     iou_thres = 0.45
