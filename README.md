@@ -23,7 +23,7 @@ If you want to see the code, please go to the branch [ZhuGeliangRecognizer](http
 and 
 [Find_Zhu_Geliang.py](https://github.com/yuan-0816/Zhu-Geliang-DDPM/blob/ZhuGeliangRecognizer/Find_Zhu_Geliang.py)   
 
-I upload the datasets to the Kaggle, you can download it from [here](https://www.kaggle.com/datasets/yuanyuan0816/zhugeliang-face) derectly.
+### I upload the datasets to the Kaggle, you can download it from [here](https://www.kaggle.com/datasets/yuanyuan0816/zhugeliang-face) derectly.
 
 put this all datasets to "Zhu-Geliang-DDPM" folder
 
