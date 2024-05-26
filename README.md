@@ -68,3 +68,17 @@ These are the parameters of ```Find_Zhu_Geliang.py```:
 
 I upload the datasets to the Kaggle, you can download it from [here](https://www.kaggle.com/datasets/yuanyuan0816/zhugeliang-face) derectly.
 
+
+```
+　　    　　 ＿＿＿
+　　　　　／＞　　  フ
+　　　　　|  　_　 _|
+　 　　　／` ミ＿xノ
+　　 　 /　　　 　 |
+　　　 /　 ヽ　　 ﾉ
+　 　 │　　|　|　|
+　／￣|　　 |　|　|
+　| (￣ヽ＿_ヽ_)__)
+　＼二つ
+
+```
