@@ -66,7 +66,7 @@ python train.py
 ```
 
 ## Result
-![images](https://github.com/yuan-0816/Zhu-Geliang-DDPM/blob/main/doc/Result.png)
+![images](https://github.com/yuan-0816/Zhu-Geliang-DDPM/blob/main/doc/Result_Light.png)
 
 My Training Loss 
 
