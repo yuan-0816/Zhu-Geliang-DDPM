@@ -14,7 +14,7 @@ Model:
 Dataset:
   dataset: "custom"
   train: True
-  data_path: "E:/code training/python/DDPM/Zhu-Geliang-DDPM/Zhu_Geliang_datasets/test"
+  data_path: "data/zhugeliang_face_square"
   # If mnist and cifar datasets, whether to download it.
   download: True
   # specify as needed.
