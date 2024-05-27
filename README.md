@@ -17,6 +17,30 @@
 
 ![images](https://github.com/yuan-0816/Zhu-Geliang-DDPM/blob/main/doc/GenerateProcess.png)
 
+## Generate Zhu-Geliang face by DDPM
+you can download the pre-trained model from [here](https://drive.google.com/file/d/15oFGT2HXYGjdnGyWpIp4KNCxXb35Pogh/view?usp=drive_link).   
+put ```zhu_geliang.pth``` to the [checkpoints](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/main/checkpoint) folder.   
+After that you can run the following command to generate Zhu-Geliang face:
+```
+python .\generate.py -cp ./checkpoint/zhu_geliang.pth -bs 1 --interval 10 --show -sp "result/zhugeliang.png" --sampler "ddim" --steps 200
+
+```
+These are the parameters of ```generate.py``` :
+   - ```-cp``` : the path of checkpoint.
+   - ```--device``` : the device used. 'cuda' (default) or 'cpu'.
+   - ```--sampler``` : the sampler method, can be 'ddpm'(default) or 'ddim'.
+   - ```-bs``` : how many images to generate at once. Default 16.
+   - ```--result_only``` : whether to output only the generated results. Default False.
+   - ```--interval``` : extract an image every how many steps. Only valid without the result_only parameter. Default 50.
+   - ```--eta``` : ddim parameter, in the paper. Default 0.0.
+   - ```--steps``` : ddim sampling steps. Default 100.
+   - ```--method``` : ddim sampling method. can be 'linear'(default) or 'quadratic'.
+   - ```--nrow``` : how many images are displayed in a row. Only valid with the result_only parameter. Default 4.
+   - ```--show``` : whether to display the result image. Default False.
+   - ```-sp``` : save path of the result image. Default None.
+   - ```--to_grayscale``` : convert images to grayscale. Default False.
+
+
 
 ## Zhu-Geliang face datasets   
 I use [yolov5-crowdhuman](https://github.com/deepakcrk/yolov5-crowdhuman) to make the Zhu-Geliang datasets, and I use the opencv ```cv2.face.LBPHFaceRecognizer``` to find the face of Zhu-Geliang.  
