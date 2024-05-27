@@ -15,6 +15,8 @@
                                                                                                #####
 ```
 
+![images](https://github.com/yuan-0816/Zhu-Geliang-DDPM/blob/main/doc/GenerateProcess.png)
+
 
 ## Zhu-Geliang face datasets   
 I use [yolov5-crowdhuman](https://github.com/deepakcrk/yolov5-crowdhuman) to make the Zhu-Geliang datasets, and I use the opencv "face.LBPHFaceRecognizer" to find the face of Zhu-Geliang.  
@@ -25,7 +27,9 @@ and
 
 ### I upload the datasets to the Kaggle, you can download it from [here](https://www.kaggle.com/datasets/yuanyuan0816/zhugeliang-face) derectly.
 
-put this all datasets to "Zhu-Geliang-DDPM" folder
+![images](https://github.com/yuan-0816/Zhu-Geliang-DDPM/blob/main/doc/ShowZhuGeliangFace.png)
+
+put this all datasets to [zhugeliang_face](https://github.com/yuan-0816/Zhu-Geliang-DDPM/tree/main/data/zhugeliang_face) folder
 
 ## Gernarate Zhu-Geliang face
 
