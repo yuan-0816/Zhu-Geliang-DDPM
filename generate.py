@@ -1,5 +1,20 @@
+"""
+Yuan @ 2024.05.26
+This is the code for generating samples from the trained model.
+run:
+    python .\generate.py -cp ./checkpoint/zhu_geliang.pth -bs 1 --interval 25 --show -sp "result/zhugeliang.png" --sampler "ddim" --steps 200
 
-# python .\generate.py -cp ./checkpoint/zhu_geliang.pth -bs 1 --interval 25 --show -sp "result/zhugeliang.png" --sampler "ddim" --steps 200
+Zhu Geliang is alive!
+
+     #######  ###                          ####             ###       ##                                           ##
+     #   ##    ##                         ##  ##             ##                                                   ####
+        ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##            ####
+       ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##              ##
+      ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##              ##
+     ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+     #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##              ##
+                                                                                               #####
+"""
 
 from utils.engine import DDPMSampler, DDIMSampler
 from model.UNet import UNet

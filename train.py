@@ -1,3 +1,18 @@
+"""
+Yuan @ 2024.05.25
+This is the code for training DDIM.
+Zhu Geliang is alive!
+
+     #######  ###                          ####             ###       ##                                           ##
+     #   ##    ##                         ##  ##             ##                                                   ####
+        ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##            ####
+       ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##              ##
+      ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##              ##
+     ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+     #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##              ##
+                                                                                               #####
+"""
+
 from dataset import create_dataset
 from model.UNet import UNet
 from utils.engine import GaussianDiffusionTrainer
