@@ -1,5 +1,5 @@
 
-# python .\generate.py -cp ./checkpoint/zhu_geliang_331.pth -bs 1 --interval 25 --show -sp "result/zhugeliang24_311.png" --sampler "ddim" --steps 200
+# python .\generate.py -cp ./checkpoint/zhu_geliang.pth -bs 1 --interval 25 --show -sp "result/zhugeliang.png" --sampler "ddim" --steps 200
 
 from utils.engine import DDPMSampler, DDIMSampler
 from model.UNet import UNet

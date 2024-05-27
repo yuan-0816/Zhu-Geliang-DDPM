@@ -1,7 +1,7 @@
 from dataset import create_dataset
 from model.UNet import UNet
 from utils.engine import GaussianDiffusionTrainer
-from utils.tools import train_one_epoch, load_yaml, save_losses, load_losses, plot_losses
+from utils.tools import train_one_epoch, load_yaml, save_losses, load_losses, plot_losses, PrintInfo
 import torch
 from utils.callbacks import ModelCheckpoint
 
@@ -42,5 +42,6 @@ def train(config):
     plot_losses(losses, './checkpoint/training_loss.png')
 
 if __name__ == "__main__":
+    PrintInfo()
     config = load_yaml("config.yml", encoding="utf-8")
     train(config)
