@@ -1,3 +1,17 @@
+"""
+Yuan @ 2024.05.25
+This is the code for loading custom dataset.
+Zhu Geliang is alive!
+
+     #######  ###                          ####             ###       ##                                           ##
+     #   ##    ##                         ##  ##             ##                                                   ####
+        ##     ##      ##  ##            ##        ####      ##      ###      ####    #####     ### ##            ####
+       ##      #####   ##  ##            ##       ##  ##     ##       ##         ##   ##  ##   ##  ##              ##
+      ##       ##  ##  ##  ##            ##  ###  ######     ##       ##      #####   ##  ##   ##  ##              ##
+     ##    #   ##  ##  ##  ##             ##  ##  ##         ##       ##     ##  ##   ##  ##    #####
+     #######  ###  ##   ######             #####   #####    ####     ####     #####   ##  ##       ##              ##
+                                                                                               #####
+"""
 import torch
 from torch.utils.data import DataLoader, Dataset
 from pathlib2 import Path, Iterable
